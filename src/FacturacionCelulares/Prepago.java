@@ -1,21 +1,21 @@
 package FacturacionCelulares;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Prepago implements Serializable {
-    private long SerialVersionUID = 1L;
-    public long numeroMinutos;
-    public List<Recarga> recargas;
+    private static final long serialVersionUID = 1L;
+    private long numeroMinutos;
+    private List<Recarga> recargas;
 
     /**
-     * Constructor de la clase Prepago con parametros
-     * @param numeroMinutos - Cantidad de minutos
+     * Constructor de la clase SetMinutos
      */
-    public Prepago(long numeroMinutos) {
-        this.numeroMinutos = numeroMinutos;
-        recargas = new ArrayList<>();
+    public void SetMinutos() {
+        this.numeroMinutos = 5;
+        recargas = new ArrayList<Recarga>();
     }
 
     /**
@@ -27,11 +27,22 @@ public class Prepago implements Serializable {
     }
 
     /**
-     * Método para modificar la cantidad de minutos
+     * Método para modificar la cantidad de minutos con fecha
+     * @param fecha
      * @param numeroMinutos
      */
-    public void setNumeroMinutos(long numeroMinutos) {
-        this.numeroMinutos = numeroMinutos;
+    public void recargaConFecha(LocalDate fecha, long numeroMinutos) {
+        this.numeroMinutos += numeroMinutos;
+        recargas.add(new Recarga(fecha,numeroMinutos));
+    }
+
+    /**
+     * Método para realizar una recarga
+     * @param numeroMinutos
+     */
+    public void Recarga(long numeroMinutos) {
+        this.numeroMinutos += numeroMinutos;
+        recargas.add(new Recarga(LocalDate.now(),numeroMinutos));
     }
 
     /**
@@ -48,6 +59,18 @@ public class Prepago implements Serializable {
      */
     public void setRecargas(List<Recarga> recargas) {
         this.recargas = recargas;
+    }
+
+    /**
+     * Método para devolver la información de la recarga
+     * @return String
+     */
+    @Override
+    public String toString() {
+        return "Prepago{" +
+                "Número minutos=" + numeroMinutos +
+                ",\n recargas:\n" + recargas +
+                '}';
     }
 }
 
