@@ -1,17 +1,32 @@
+//Paquete que contiene la clase
 package FacturacionCelulares;
 
-import java.io.Serializable;
+//Importación de librerias
+import java.time.LocalDate;
+import FacturacionException.LlamadaExc;
 
-public class LlamadaNacional implements Serializable {
-    private long SerialVersionUID = 1L;
-
-    public LlamadaNacional() {
-        //TODO - Crear constructor
+/**
+ * Clase LlamadaNacional que hereda de la clase Llamada
+ */
+public class LlamadaNacional extends Llamada{
+    public LlamadaNacional (long duracion, LocalDate fecha, long telefonoDestinatario) throws LlamadaExc {
+        super(duracion, fecha, telefonoDestinatario);
     }
 
-    public long calcularValor() {
-        //TODO - Crear método
-        return 0;
+    /**
+     * Metodo para calcular el valor de la llamada
+     * @param cuenta Cuenta del cliente
+     * @return valor de la llamada
+     */
+    @Override
+    public long calcularValor(Cuenta cuenta) throws LlamadaExc {
+        if (cuenta instanceof Prepago) {
+            return super.getDuracion();
+        }
+        if (cuenta instanceof Postpago) {
+            return 0;
+        }
+        throw new LlamadaExc("Tipo de cuenta no válido");
     }
 
 }

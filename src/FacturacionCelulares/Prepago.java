@@ -5,15 +5,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Prepago implements Serializable {
+public class Prepago extends Cuenta {
     private static final long serialVersionUID = 1L;
     private long numeroMinutos;
     private List<Recarga> recargas;
 
     /**
-     * Constructor de la clase SetMinutos
+     * Constructor de la clase SetMinutos con numero de minutos por defecto (5 minutos)
      */
-    public void SetMinutos() {
+    public Prepago(long id, long numero, String tipo) {
+        super(id, numero, tipo);
         this.numeroMinutos = 5;
         recargas = new ArrayList<Recarga>();
     }
@@ -37,7 +38,7 @@ public class Prepago implements Serializable {
     }
 
     /**
-     * Método para realizar una recarga
+     * Metodo para realizar una recarga en la fecha actual
      * @param numeroMinutos
      */
     public void Recarga(long numeroMinutos) {
@@ -46,7 +47,7 @@ public class Prepago implements Serializable {
     }
 
     /**
-     * Método para devolver la lista de recargas
+     * Metodo para devolver la lista de recargas
      * @return lista de recargas
      */
     public List<Recarga> getRecargas() {
@@ -54,7 +55,7 @@ public class Prepago implements Serializable {
     }
 
     /**
-     * Método para modificar la lista de recargas
+     * Metodo para devolver la lista de recargas
      * @param recargas
      */
     public void setRecargas(List<Recarga> recargas) {
@@ -62,7 +63,7 @@ public class Prepago implements Serializable {
     }
 
     /**
-     * Método para devolver la información de la recarga
+     * Metodo para devolver la información de la recarga
      * @return String
      */
     @Override
@@ -71,6 +72,13 @@ public class Prepago implements Serializable {
                 "Número minutos=" + numeroMinutos +
                 ",\n recargas:\n" + recargas +
                 '}';
+    }
+
+
+    @Override
+    public long obtenerPagoCuenta() {
+        //TODO - Crear método
+        return 0;
     }
 }
 

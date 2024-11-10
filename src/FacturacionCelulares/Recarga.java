@@ -40,6 +40,6 @@ public class Recarga implements Serializable {
      */
     @Override
     public String toString() {
-        return "\nRecarga{" + "fecha:" + fecha + ", valor=" + valor + '}';
+        return "Recarga{" + "fecha:" + fecha + ", valor=" + valor + "}\n";
     }
 }

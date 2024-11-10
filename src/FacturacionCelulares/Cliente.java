@@ -9,6 +9,7 @@ public class Cliente implements Serializable {
     private String direccion;
     private String identificacion;
     private String tipoId;
+    private Cuenta cuenta;
 
     public String getNombre() {
         return nombre;
@@ -24,5 +25,13 @@ public class Cliente implements Serializable {
 
     public String getTipoId() {
         return tipoId;
+    }
+
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
     }
 }

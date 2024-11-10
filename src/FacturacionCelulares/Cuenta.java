@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Clase Cuenta
  */
-public class Cuenta implements Serializable {
+public abstract class Cuenta implements Serializable {
     private long SerialVersionUID = 1L;
     private long id;
     private long numero;
@@ -26,17 +26,14 @@ public class Cuenta implements Serializable {
         this.id = id;
         this.numero = numero;
         llamadas = new ArrayList<Llamada>();
-        if (tipo.equals("Prepago")) {
-            tipoPrepago = new Prepago();
-        } else if (tipo.equals("Postpago")) {
-            tipoPostpago = new Postpago();
+        if (tipo.equalsIgnoreCase("Prepago")) {
+            tipoPrepago = new Prepago(id, numero, tipo);
+        } else if (tipo.equalsIgnoreCase("Postpago")) {
+            tipoPostpago = new Postpago(id, numero, tipo);
         }
     }
 
-    public long obtenerPagoCuenta(){
-        return 1L;
-        //TODO - Create method / Crear método
-    }
+    public abstract long obtenerPagoCuenta();
 
     /**
      * Método para devolver la lista de llamadas
@@ -52,38 +49,6 @@ public class Cuenta implements Serializable {
      */
     public void setLlamadas(List<Llamada> llamadas) {
         this.llamadas = llamadas;
-    }
-
-    /**
-     * Método para devolver el tipo de postpago
-     * @return
-     */
-    public Postpago getTipoPostpago() {
-        return tipoPostpago;
-    }
-
-    /**
-     * Método para modificar el tipo de postpago
-     * @param tipoPostpago
-     */
-    public void setTipoPostpago(Postpago tipoPostpago) {
-        this.tipoPostpago = tipoPostpago;
-    }
-
-    /**
-     * Método para devolver el tipo de prepago
-     * @return
-     */
-    public Prepago getTipoPrepago() {
-        return tipoPrepago;
-    }
-
-    /**
-     * Método para modificar el tipo de prepago
-     * @param tipoPrepago
-     */
-    public void setTipoPrepago(Prepago tipoPrepago) {
-        this.tipoPrepago = tipoPrepago;
     }
 
     /**

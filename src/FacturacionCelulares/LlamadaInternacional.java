@@ -1,24 +1,62 @@
+// Paquete que contiene la clase
 package FacturacionCelulares;
 
-import java.io.Serializable;
+//Importación de librerias
+import FacturacionException.LlamadaExc;
 
-public class LlamadaInternacional implements Serializable {
-    private long SerialVersionUID = 1L;
+import java.time.LocalDate;
+
+/**
+ * Clase LlamadaInternacional que hereda de la clase Llamada
+ */
+public class LlamadaInternacional extends Llamada {
     private String paisDestino;
 
-    public LlamadaInternacional(String paisDestino) {
-        //TODO - Revisar Constructor
+    /**
+     * Constructor de la clase LlamadaInternacional
+     * @param duracion Duración de la llamada
+     * @param fecha Fecha de la llamada
+     * @param telefonoDestinatario Teléfono del destinatario
+     * @param paisDestino País de destino
+     * @throws LlamadaExc Excepción de la llamada
+     */
+    public LlamadaInternacional(long duracion, LocalDate fecha, long telefonoDestinatario, String paisDestino) throws LlamadaExc {
+        super(duracion, fecha, telefonoDestinatario);
+        if (paisDestino == null || paisDestino.isEmpty() || paisDestino.isBlank()) {
+            throw new LlamadaExc("El país de destino no puede estar vacío");
+        }
         this.paisDestino = paisDestino;
     }
 
+    /**
+     * Metodo para obtener el país de destino
+     * @return paisDestino
+     */
     public String getPaisDestino() {
         return paisDestino;
     }
 
-    public long CalcularValor(){
-        return 0;
-        //TODO - Crear método para calcular el valor de la llamada internacional
-
+    /**
+     * Metodo para establecer el país de destino
+     * @param paisDestino País de destino
+     */
+    public void setPaisDestino(String paisDestino) {
+        this.paisDestino = paisDestino;
     }
 
+    /**
+     * Metodo para calcular el valor de la llamada
+     * @param cuenta Cuenta del cliente
+     * @return valor de la llamada
+     */
+    @Override
+    public long calcularValor(Cuenta cuenta) throws LlamadaExc {
+        if (cuenta instanceof Prepago) {
+            return (long) (super.getDuracion() + super.getDuracion()*0.2);
+        }
+        if (cuenta instanceof Postpago) {
+            return (long) (Math.ceil(((Postpago) cuenta).getCargoFijo()*0.20));
+        }
+        throw new LlamadaExc("Tipo de cuenta no válido");
+    }
 }
