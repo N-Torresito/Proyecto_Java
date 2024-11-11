@@ -23,7 +23,7 @@ public class LlamadaInternacional extends Llamada {
      * @throws LlamadaExc Excepción de la llamada
      */
     public LlamadaInternacional(long duracion, LocalDate fecha, long telefonoDestinatario, String paisDestino, Cuenta cuenta) throws LlamadaExc {
-        super(duracion, fecha, telefonoDestinatario);
+        super(duracion, fecha, Long.parseLong(paisDestino + telefonoDestinatario) );
         if (paisDestino == null || paisDestino.isEmpty() || paisDestino.isBlank()) {
             throw new LlamadaExc("El país de destino no puede estar vacío");
         }

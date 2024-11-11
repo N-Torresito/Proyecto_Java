@@ -91,21 +91,23 @@ public class Empresa implements IEmpresa, Serializable {
 
     /**
      * Agrega una cuenta a un cliente
+     *
      * @param identificacion Identificación del cliente
-     * @param tipoCuenta Tipo de cuenta
-     * @param numero Número de la cuenta
+     * @param tipoCuenta     Tipo de cuenta
+     * @param numero         Número de la cuenta
+     * @param id
      * @throws EmpresaExc
      * @throws ClienteExc
      * @throws CuentaExc
      */
     @Override
-    public void AgregarCuenta(String identificacion, String tipoCuenta, long numero) throws EmpresaExc, ClienteExc, CuentaExc {
+    public void AgregarCuenta(String identificacion, String tipoCuenta, long numero, long id) throws EmpresaExc, ClienteExc, CuentaExc {
         Cuenta cuenta = null;
         if (tipoCuenta.equalsIgnoreCase("prepago")) {
-            cuenta = new Prepago(Utils.getCONSECUTIVO(), numero, tipoCuenta);
+            cuenta = new Prepago(id, numero, tipoCuenta);
         }
         if (tipoCuenta.equalsIgnoreCase("postpago")) {
-            cuenta = new Postpago(Utils.getCONSECUTIVO(), numero, tipoCuenta);
+            cuenta = new Postpago(id, numero, tipoCuenta);
         }
         if (BuscarCliente(identificacion) != null && BuscarCliente(numero) == null) {
             BuscarCliente(identificacion).setCuenta(cuenta);
