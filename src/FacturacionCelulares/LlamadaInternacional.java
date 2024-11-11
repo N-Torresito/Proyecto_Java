@@ -14,18 +14,21 @@ public class LlamadaInternacional extends Llamada {
 
     /**
      * Constructor de la clase LlamadaInternacional
-     * @param duracion Duración de la llamada
-     * @param fecha Fecha de la llamada
+     *
+     * @param duracion             Duración de la llamada
+     * @param fecha                Fecha de la llamada
      * @param telefonoDestinatario Teléfono del destinatario
-     * @param paisDestino País de destino
+     * @param paisDestino          País de destino
+     * @param cuenta                Cuenta del cliente
      * @throws LlamadaExc Excepción de la llamada
      */
-    public LlamadaInternacional(long duracion, LocalDate fecha, long telefonoDestinatario, String paisDestino) throws LlamadaExc {
+    public LlamadaInternacional(long duracion, LocalDate fecha, long telefonoDestinatario, String paisDestino, Cuenta cuenta) throws LlamadaExc {
         super(duracion, fecha, telefonoDestinatario);
         if (paisDestino == null || paisDestino.isEmpty() || paisDestino.isBlank()) {
             throw new LlamadaExc("El país de destino no puede estar vacío");
         }
         this.paisDestino = paisDestino;
+        super.setValor(calcularValor(cuenta));
     }
 
     /**
@@ -58,5 +61,16 @@ public class LlamadaInternacional extends Llamada {
             return (long) (Math.ceil(((Postpago) cuenta).getCargoFijo()*0.20));
         }
         throw new LlamadaExc("Tipo de cuenta no válido");
+    }
+
+    /**
+     * Metodo para obtener la información de la llamada
+     * @return Información de la llamada
+     */
+    @Override
+    public String toString() {
+        return "Llamada Internacional[ Fecha: " + super.getFecha() + ", Duración: " + super.getDuracion()
+                + ", Telefono Destinatario: (" + paisDestino + ") " + super.getTelefonoDestinatario()
+                + ", Valor: " + super.getValor() + "]\n";
     }
 }

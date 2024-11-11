@@ -108,4 +108,18 @@ public abstract class Llamada implements Serializable {
     public void setValor(long valor) {
         this.valor = valor;
     }
+
+    /**
+     * Metodo para obtener la información de la llamada
+     * @return - Información de la llamada
+     */
+    @Override
+    public String toString() {
+        return "[" +
+                "Duración: " + duracion +
+                "Fecha:" + fecha +
+                ", Telefono Destino:" + telefonoDestinatario +
+                ", Valor: " + valor +
+                "]\n";
+    }
 }
