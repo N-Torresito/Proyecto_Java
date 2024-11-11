@@ -78,14 +78,14 @@ public class TestConsola {
                             String identificacion = scanner.nextLine();
                             System.out.print("Ingrese el número de telefono de la cuenta: ");
                             long cuenta = Long.parseLong(scanner.nextLine());
-                            empresa.AgregarCuenta(identificacion, "prepago", cuenta);
+                            empresa.AgregarCuenta(identificacion, "prepago", cuenta, Utils.getCONSECUTIVO());
                         } else if (selec == 2) {
                             System.out.println("Agregar cuenta de prepago");
                             System.out.print("Ingrese el número de identificación del cliente: ");
                             String identificacion = scanner.nextLine();
                             System.out.print("Ingrese el número de telefono de la cuenta: ");
                             long cuenta = Long.parseLong(scanner.nextLine());
-                            empresa.AgregarCuenta(identificacion, "postpago", cuenta);
+                            empresa.AgregarCuenta(identificacion, "postpago", cuenta, Utils.getCONSECUTIVO());
                         } else {
                             System.out.println("Regresar al menú principal");
                         }
@@ -105,6 +105,7 @@ public class TestConsola {
                             long cuenta = Long.parseLong(scanner.nextLine());
                             System.out.print("Ingrese la duración de la llamada: ");
                             int duracion = Integer.parseInt(scanner.nextLine());
+                            System.out.println("Ingrese la fecha de la llamada con formato dd/MM/yyyy");
                             LocalDate fecha = Utils.convertirStringFecha(scanner.nextLine());
                             empresa.AgregarLlamadaNacional(identificacion, duracion, cuenta, fecha);
                         } else if (selec == 2) {

@@ -14,7 +14,7 @@ public interface IEmpresa {
     Cliente BuscarCliente(long numero);
     void IngresarCliente(Cliente cliente);
     void IngresarCliente(String direccion, String nombre, String identificacion, String tipoIdentificacion) throws ClienteExc;
-    void AgregarCuenta(String identificacion, String tipoCuenta, long numero) throws EmpresaExc, ClienteExc, CuentaExc;
+    void AgregarCuenta(String identificacion, String tipoCuenta, long numero, long id) throws EmpresaExc, ClienteExc, CuentaExc;
     void AgregarLlamadaNacional(String identificacion, long duracion, long telefonoDestinatario, LocalDate fecha) throws EmpresaExc, LlamadaExc;
     void AgregarLlamadaInternacional(String identificacion, long duracion, long telefonoDestinatario, String paisDestino, LocalDate fecha) throws LlamadaExc;
     void AgregarRecarga(LocalDate fecha, String identificacion, long valor) throws RecargaExc;

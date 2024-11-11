@@ -88,7 +88,7 @@ public class ManejoArchivos {
                 temp = sc.nextLine().trim();
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println(e);
         }
         return clientes;
     }
