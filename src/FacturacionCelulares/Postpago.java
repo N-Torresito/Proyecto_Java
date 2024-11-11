@@ -1,6 +1,10 @@
 package FacturacionCelulares;
 
-import java.io.Serializable;
+import FacturacionException.CuentaExc;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Postpago extends Cuenta {
     private long SerialVersionUID = 1L;
@@ -9,13 +13,13 @@ public class Postpago extends Cuenta {
     /**
      * Constructor de la clase Postpago con cargo fijo predeterminado (Cargo fijo = $20,000)
      */
-    public Postpago(long id, long numero, String tipo) {
-        super(id, numero, tipo);
+    public Postpago(long id, long numero, String tipo) throws CuentaExc {
+        super(id, numero);
         this.cargoFijo = 20000;
     }
 
     /**
-     * Método para devolver el cargo fijo
+     * Metodo para devolver el cargo fijo
      * @return cargo fijo
      */
     public long getCargoFijo() {
@@ -23,7 +27,7 @@ public class Postpago extends Cuenta {
     }
 
     /**
-     * Método para modificar el cargo fijo
+     * Metodo para modificar el cargo fijo
      * @param cargoFijo
      */
     public void setCargoFijo(long cargoFijo) {
@@ -31,7 +35,7 @@ public class Postpago extends Cuenta {
     }
 
     /**
-     * Sobreescritura del método toString heredado
+     * Sobreescritura del metodo toString heredado
      * @return
      */
     @Override
@@ -39,9 +43,30 @@ public class Postpago extends Cuenta {
         return "Postpago{" + "Cargo fijo:" + cargoFijo + '}';
     }
 
+    /**
+     * Metodo para obtener el pago de la cuenta
+     * @return total
+     */
     @Override
-    public long obtenerPagoCuenta() {
-        //TODO - Crear método
-        return 0;
+    public long obtenerPagoCuenta(LocalDate fecha) {
+        long total = 0;
+        for (Llamada e : super.getLlamadas()){
+            if (e.getFecha().getMonthValue() == fecha.getMonthValue() && e.getFecha().getYear() == fecha.getYear()) {
+                total += e.getValor();
+            }
+        }
+        return total;
+    }
+
+    public List<Llamada> getLlamadasFecha(LocalDate fecha) {
+        List<Llamada> LlamadasFecha = new ArrayList<Llamada>();
+        for (Llamada e : this.getLlamadas()){
+            if (e.getFecha().getMonthValue() == fecha.getMonthValue() && e.getFecha().getYear() == fecha.getYear()) {
+                if (e instanceof LlamadaInternacional) {
+                    LlamadasFecha.add(e);
+                }
+            }
+        }
+        return LlamadasFecha;
     }
 }

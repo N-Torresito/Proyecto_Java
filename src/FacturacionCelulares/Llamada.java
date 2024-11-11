@@ -108,4 +108,14 @@ public abstract class Llamada implements Serializable {
     public void setValor(long valor) {
         this.valor = valor;
     }
+
+    @Override
+    public String toString() {
+        return "[" +
+                "Duración: " + duracion +
+                "Fecha:" + fecha +
+                ", Telefono Destino:" + telefonoDestinatario +
+                ", Valor: " + valor +
+                "]\n";
+    }
 }

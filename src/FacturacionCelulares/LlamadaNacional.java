@@ -9,8 +9,17 @@ import FacturacionException.LlamadaExc;
  * Clase LlamadaNacional que hereda de la clase Llamada
  */
 public class LlamadaNacional extends Llamada{
-    public LlamadaNacional (long duracion, LocalDate fecha, long telefonoDestinatario) throws LlamadaExc {
+    /**
+     * Constructor de la clase LlamadaNacional
+     * @param duracion Duración de la llamada
+     * @param fecha Fecha de la llamada
+     * @param telefonoDestinatario Teléfono del destinatario
+     * @param cuenta Cuenta del cliente
+     * @throws LlamadaExc Excepción de la llamada
+     */
+    public LlamadaNacional (long duracion, LocalDate fecha, long telefonoDestinatario, Cuenta cuenta) throws LlamadaExc {
         super(duracion, fecha, telefonoDestinatario);
+        super.setValor(calcularValor(cuenta));
     }
 
     /**
@@ -28,5 +37,7 @@ public class LlamadaNacional extends Llamada{
         }
         throw new LlamadaExc("Tipo de cuenta no válido");
     }
+
+
 
 }
