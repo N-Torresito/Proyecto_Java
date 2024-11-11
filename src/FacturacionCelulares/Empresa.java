@@ -205,6 +205,7 @@ public class Empresa implements IEmpresa, Serializable {
         if (BuscarCliente(identificacion) != null && BuscarCliente(identificacion).getCuenta() instanceof Postpago) {
             Cliente cliente = BuscarCliente(identificacion);
             List<Llamada> cuenta = cliente.getCuenta().getLlamadasFecha(fecha);
+            cuenta.sort(Comparator.comparing(Llamada::getFecha));
 
 
             reporte.append("Reporte de facturación postpago a fin de mes\n");
@@ -250,6 +251,7 @@ public class Empresa implements IEmpresa, Serializable {
             for (Cliente cliente : clientes) {
                 if (cliente.getCuenta() instanceof Prepago) {
                     List<Llamada> cuenta = cliente.getCuenta().getLlamadasFecha(fecha);
+                    cuenta.sort(Comparator.comparing(Llamada::getFecha));
 
                     reporte.append("Reporte de facturación prepago a fin de mes\n");
                     reporte.append("Cliente: ").append(cliente.getNombre()).append("\n");
