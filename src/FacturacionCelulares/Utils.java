@@ -11,11 +11,15 @@ import java.time.format.DateTimeFormatter;
 public class Utils {
     private static long CONSECUTIVO = 1;
 
+    public static long getConsecutivo(){
+        return CONSECUTIVO;
+    }
+
     /**
      * Metodo para obtener el consecutivo y aumentarlo en 1 posteriormente
      * @return consecutivo valor del consecutivo actual
      */
-    public static long getCONSECUTIVO() {
+    public static long getCONSECUTIVOaumentar() {
         return CONSECUTIVO++;
     }
 

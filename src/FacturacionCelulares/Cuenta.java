@@ -12,7 +12,7 @@ import java.util.*;
  * Clase Cuenta
  */
 public abstract class Cuenta implements Serializable {
-    private long SerialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     private long id;
     private long numero;
     private List<Llamada> llamadas;

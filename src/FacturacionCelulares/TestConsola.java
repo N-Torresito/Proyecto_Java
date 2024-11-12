@@ -78,14 +78,16 @@ public class TestConsola {
                             String identificacion = scanner.nextLine();
                             System.out.print("Ingrese el número de telefono de la cuenta: ");
                             long cuenta = Long.parseLong(scanner.nextLine());
-                            empresa.AgregarCuenta(identificacion, "prepago", cuenta, Utils.getCONSECUTIVO());
+                            empresa.AgregarCuenta(identificacion, "prepago", cuenta, Utils.getCONSECUTIVOaumentar());
+                            System.out.println("Cuenta agregada correctamente, el id de la cuenta es: " + Utils.getConsecutivo());
                         } else if (selec == 2) {
                             System.out.println("Agregar cuenta de prepago");
                             System.out.print("Ingrese el número de identificación del cliente: ");
                             String identificacion = scanner.nextLine();
                             System.out.print("Ingrese el número de telefono de la cuenta: ");
                             long cuenta = Long.parseLong(scanner.nextLine());
-                            empresa.AgregarCuenta(identificacion, "postpago", cuenta, Utils.getCONSECUTIVO());
+                            empresa.AgregarCuenta(identificacion, "postpago", cuenta, Utils.getCONSECUTIVOaumentar());
+                            System.out.println("Cuenta agregada correctamente, el id de la cuenta es: " + Utils.getConsecutivo());
                         } else {
                             System.out.println("Regresar al menú principal");
                         }
@@ -108,6 +110,12 @@ public class TestConsola {
                             System.out.println("Ingrese la fecha de la llamada con formato dd/MM/yyyy");
                             LocalDate fecha = Utils.convertirStringFecha(scanner.nextLine());
                             empresa.AgregarLlamadaNacional(identificacion, duracion, cuenta, fecha);
+                            System.out.println("Llamada internacional agregada correctamente");
+                            if (empresa.BuscarCliente(identificacion).getCuenta() instanceof Prepago) {
+                                System.out.println("Le quedan " + ((Prepago) empresa.BuscarCliente(identificacion).getCuenta()).getNumeroMinutos() + " minutos");
+                            } else {
+                                System.out.println("Esta llamada no afecta el total de la cuenta");
+                            }
                         } else if (selec == 2) {
                             System.out.println("Agregar llamada Internacional");
                             System.out.print("Ingrese el número de identificación del cliente: ");
@@ -121,6 +129,12 @@ public class TestConsola {
                             System.out.println("Ingrese la fecha de la llamada con formato dd/MM/yyyy");
                             LocalDate fecha = Utils.convertirStringFecha(scanner.nextLine());
                             empresa.AgregarLlamadaInternacional(identificacion, duracion, cuenta, pais, fecha);
+                            System.out.println("Llamada internacional agregada correctamente");
+                            if (empresa.BuscarCliente(identificacion).getCuenta() instanceof Prepago) {
+                                System.out.println("Le quedan " + ((Prepago) empresa.BuscarCliente(identificacion).getCuenta()).getNumeroMinutos() + " minutos");
+                            } else {
+                                System.out.println("Recuerde que esta llamada se cobrará al final de mes");
+                            }
                         }
                         break;
                     case 4:
@@ -132,6 +146,7 @@ public class TestConsola {
                         System.out.println("Ingrese el valor de la recarga en minutos");
                         long valor = Long.parseLong(scanner.nextLine());
                         empresa.AgregarRecarga(fecha, identificacion, valor);
+                        System.out.println("Recarga agregada correctamente, su saldo actual es: " + ((Prepago) empresa.BuscarCliente(identificacion).getCuenta()).getNumeroMinutos());
                         break;
                     case 5:
                         System.out.println("Reporte de facturación postpago a fin de mes");

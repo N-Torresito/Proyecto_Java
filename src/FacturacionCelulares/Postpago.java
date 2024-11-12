@@ -10,7 +10,7 @@ import java.util.List;
  * Clase Postpago que hereda de la clase Cuenta
  */
 public class Postpago extends Cuenta {
-    private long SerialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     private long cargoFijo;
 
     /**

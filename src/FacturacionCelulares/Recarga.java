@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * Clase Recarga
  */
 public class Recarga implements Serializable {
-    private long SerialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     public LocalDate fecha;
     public long valor;
 

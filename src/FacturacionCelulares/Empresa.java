@@ -11,7 +11,7 @@ import java.util.*;
  * Clase Empresa
  */
 public class Empresa implements IEmpresa, Serializable {
-    private long SerialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     private String nombre;
     private List<Cliente> clientes;
     private List<Cuenta> cuentas;
